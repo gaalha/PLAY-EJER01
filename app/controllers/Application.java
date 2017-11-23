@@ -13,11 +13,6 @@ public class Application extends Controller {
         return ok(views.html.persona.render());
     }
 
-    public Result getPeopleEdit(Integer id) {
-        Persona per = Persona.find.byId(id);
-        return ok(views.html.personaEdit.render(per));
-    }
-
     public Result getTask(){
         return ok(views.html.taskGrid.render());
     }

@@ -16,8 +16,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /peoples                    controllers.Application.getPeople()
 GET     /prueba                     controllers.Prueba.prueba()
 
-GET     /persona/editar/:id         controllers.Application.getPeopleEdit(id: Integer)
-POST    /editar/:id                 controllers.Prueba.getEditar(id: Integer)
+#GET     /persona/editar/:id         controllers.Application.getPeopleEdit(id: Integer)
+#POST    /editar/:id                 controllers.Prueba.getEditar(id: Integer)
 DELETE  /eliminar/:id               controllers.Prueba.getEliminar(id: Integer)
 POST    /insertar                   controllers.Prueba.save()
 GET     /getPeople/:id              controllers.Prueba.getPeople(id: String)
@@ -26,6 +26,7 @@ GET     /getPeople/:id              controllers.Prueba.getPeople(id: String)
 GET     /task                       controllers.TaskController.GetTaskView()
 GET     /task/view                  controllers.Application.getTask()
 GET     /task/view/selectPeople     controllers.TaskController.getTaskToSelect()
+
 #ELIMINAR, MODIFICAR, AGREGAR y LLENAR CAMPOS
 GET     /task/get/:id               controllers.TaskController.getTask(id: String)
 POST    /task/insert                controllers.TaskController.getSaveTask()

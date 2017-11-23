@@ -5,12 +5,12 @@
     <div class="row">
 
         <div class="form-group col-md-12">
-            <label for="txtNombre">Nombre: </label>
+            <label for="txtNombre">@Messages.get("api.person.name")</label>
             <input type="text" class="form-control" placeholder="" name="txtNombre" id="txtNombre">
         </div>
 
         <div class="form-group col-md-12">
-            <label for="txtEdad">Edad:</label>
+            <label for="txtEdad">@Messages.get("api.person.age")</label>
             <input type="number" class="form-control" placeholder="" id="txtEdad" name="txtEdad">
         </div>
 
@@ -19,7 +19,7 @@
         <div class="col-xs-12" style="margin-top:20px;">
             <button class="btn btn-primary btn-md pull-right" type="submit">
                 <i class="fa fa-floppy-o"></i>
-                GUARDAR
+                @Messages.get("api.button.save")
             </button>
         </div>
     </div>

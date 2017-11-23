@@ -67,12 +67,9 @@ public class TaskController extends Controller{
         try{
             task = Task.find.byId(id);
             if (task != null){
-                //persona.setDeletedAt(new Date());
-                //city.setStatus(0);
-                //city.update();
                 task.delete();
                 success = true;
-                message = Messages.get("Registro eliminado con exito!");
+                message = Messages.get("api.record.delete");
             }
             response = new Response(success,message);
         }catch (Exception e){
@@ -108,25 +105,16 @@ public class TaskController extends Controller{
                 Task task;
                 if (idHidden.isEmpty()) {
                     task = new Task();
-
-                    task.setTitle(txtTitulo);
-                    task.setDescription(txtDescripcion);
-                    task.setIdPersona(Persona.find.byId(selPersona));
-                    task.save();
-                    message= Messages.get("Ingresado con exito!");
+                    message= Messages.get("api.record.save");
                 }else {
                     int idObj= Integer.parseInt(idHidden);
-
                     task = Task.find.byId(idObj);
-                    task.setTitle(txtTitulo);
-                    task.setDescription(txtDescripcion);
-                    task.setIdPersona(Persona.find.byId(selPersona));
-                    task.save();
-                    message= Messages.get("Modificado con exito");
+                    message= Messages.get("api.record.update");
                 }
-            /*city.setName(txtName.trim());
-            city.setIdState(State.getById(Integer.parseInt(idState.trim())));
-            city.save(); */
+                task.setTitle(txtTitulo);
+                task.setDescription(txtDescripcion);
+                task.setIdPersona(Persona.find.byId(selPersona));
+                task.save();
                 success = true;
             }
             response = new Response(success,message);
@@ -141,7 +129,7 @@ public class TaskController extends Controller{
     public Result getTask(String id){
         int idCtrl=Integer.parseInt(id.trim());
         boolean success = false;
-        String message = Messages.get("");
+        String message = Messages.get("api.record.error");
         Task task = null;
         ItemTask item=null;
         Response<ItemTask> response=null;
@@ -157,7 +145,7 @@ public class TaskController extends Controller{
                 item.setNombre(task.getIdPersona().getNombre());
 
                 success = true;
-                message= Messages.get("CORRECTO");
+                message= Messages.get("api.record.success");
             }
 
             response = new Response(success,message,item);

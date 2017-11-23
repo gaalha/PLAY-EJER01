@@ -37,7 +37,7 @@ public class Prueba extends Controller{
         return ok(Json.toJson(new Response(true, "Exito", listaItem)));
     }
 
-    public Result getEditar(Integer id){
+    /*public Result getEditar(Integer id){
         Persona persona = Persona.find.byId(id);
         Integer edad = null;
 
@@ -55,7 +55,7 @@ public class Prueba extends Controller{
     }
 
 
-    /*public Result getEliminar(Integer id){
+    public Result getEliminar(Integer id){
         Persona persona = Persona.find.byId(id);
         if(persona!=null)
             persona.delete();
@@ -76,7 +76,7 @@ public class Prueba extends Controller{
                 //city.update();
                 persona.delete();
                 success = true;
-                message=Messages.get("Registro eliminado con exito");
+                message=Messages.get("api.record.delete");
             }
             response = new Response(success,message);
         }catch (Exception e){
@@ -120,7 +120,7 @@ public class Prueba extends Controller{
         try {
 
             if (txtNombre.isEmpty()) {
-                message = Messages.get("ERROR: ¡Campos vacios!");
+                message = Messages.get("   ");
                 response = new Response(success, message);
                 return ok(Json.toJson(response));
             } else{
@@ -128,23 +128,17 @@ public class Prueba extends Controller{
                 Persona persona;
                 if (idHidden.isEmpty()) {
                     persona = new Persona();
-
-                    persona.setNombre(txtNombre);
-                    persona.setEdad(txtEdad);
                     persona.save();
-                    message= Messages.get("Ingresado con exito!");
+                    message= Messages.get("api.record.save");
                 }else {
                     int idObj= Integer.parseInt(idHidden);
-
                     persona = Persona.find.byId(idObj);
-                    persona.setNombre(txtNombre);
-                    persona.setEdad(txtEdad);
-                    persona.save();
-                    message= Messages.get("Modificado con exito");
+                    message= Messages.get("api.record.update");
                 }
-            /*city.setName(txtName.trim());
-            city.setIdState(State.getById(Integer.parseInt(idState.trim())));
-            city.save(); */
+
+                persona.setNombre(txtNombre);
+                persona.setEdad(txtEdad);
+                persona.save();
                 success = true;
             }
             response = new Response(success,message);
@@ -159,7 +153,7 @@ public class Prueba extends Controller{
     public Result getPeople(String id){
         int idCtrl=Integer.parseInt(id.trim());
         boolean success = false;
-        String message = Messages.get("");
+        String message = Messages.get("api.record.error");
         Persona persona=null;
         ItemPeople item=null;
         Response<ItemPeople> response=null;
@@ -173,7 +167,7 @@ public class Prueba extends Controller{
                 item.setEdad(persona.getEdad());
 
                 success = true;
-                message= Messages.get("CORRECTO");
+                message= Messages.get("api.record.success");
             }
 
             response = new Response(success,message,item);

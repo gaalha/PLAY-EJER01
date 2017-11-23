@@ -1,6 +1,5 @@
 
-#VIEWS
-#taskGrid
+
 api.person.title = Personas
 api.person.name = Nombre
 api.person.age = edad
@@ -16,5 +15,4 @@ api.record.save = "Registro guardado con exito"
 api.record.update = "Registro modificado con exito"
 api.record.error = "ERROR: ¡Campos vacios!"
 api.record.success = "¡Correcto!"
-
 
