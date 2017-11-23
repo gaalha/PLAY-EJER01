@@ -1,13 +1,13 @@
-var gridButtons = "";
+var gridButtonsPerson = "";
 var gridStatus = "";
 var table;
 
 $(document).ready(function(){
     prepareButtons()
-    initGrid()
+    initGridPerson()
 });
 
-
+// /////////////////////////////////////// PERSONA
 function bindButtons(){
     $('#tblTask tbody tr td button').unbind('click').on('click',function(event){
         if(event.preventDefault) event.preventDefault();
@@ -23,17 +23,48 @@ function bindButtons(){
 }
 
 function prepareButtons(){
-    var bodyButtons = $("#gridButtons").val();
+    var bodyButtons = $("#gridButtonsPerson").val();
     var tags = $("<div/>");
     tags.append(bodyButtons);
 
     $("#btnNew").click(function(){showDialog()});
 
-    gridButtons = "<center>"+tags.html()+"</center>"
+    gridButtonsPerson = "<center>"+tags.html()+"</center>"
 }
 
 
-function initGrid(){
+function initGridPerson(){
+    table = $('#tblPerson')
+    .on('draw.dt',function(e,settings,json,xhr){
+        setTimeout(function(){bindButtons();},500);
+        //drawRowNumbers("#example",table);
+     })
+    .DataTable( {
+        ajax: "/prueba",
+        aoColumns: [
+            { data: "idPersona" },
+            { data: "nombre"},
+            {
+                data: "edad",
+                render:function(data,type,row){
+                    return data+" años";
+                }
+            },
+             {
+                 sortable:false, searchable:false,
+                 render:function(data,type,row){
+                    //console.log(data);
+                    return gridButtonsPerson.replace("{data}", Base64.encode(JSON.stringify(row)));
+                    //return "<a href='/persona/editar/"+row.idPersona+"' id='editar' onclick='confirmar()'>Editar </a>"
+                    //+ "<a href='/eliminar/"+row.idPersona+"'>Eliminar</a>";
+                 }
+             }
+        ]
+    });
+    //$('#example').removeClass('display').addClass('table table-bordered table-hover dataTable');
+};
+
+/*function initGrid(){
     table = $('#tblTask')
     .on('draw.dt',function(e,settings,json,xhr){
         setTimeout(function(){bindButtons();},500);
@@ -55,10 +86,10 @@ function initGrid(){
         ]
     });
     console.log("description");
-};
+};*/
 
 
-function deleteRecord(idtask){
+/*function deleteRecord(idtask){
 $.confirm({
     title: 'CONFIRMAR',
     content: 'Desea eliminar?',
@@ -82,9 +113,9 @@ $.confirm({
         }
     }
 });
-}
+}*/
 
-function loadData(idtask){
+/*function loadData(idtask){
     var form = $("#frmTask");
     var txtTitle = $("#txtTitulo");
     var txtDescripcion = $("#txtDescripcion");
@@ -101,9 +132,9 @@ function loadData(idtask){
                 }
             }
         });
-}
+}*/
 
-function showDialog(idtask){
+/*function showDialog(idtask){
     var isEditing = !(typeof(idtask) === "undefined" || idtask === 0);
 
     dialog = bootbox.dialog({
@@ -122,10 +153,10 @@ function showDialog(idtask){
         console.log("ID Persona a cargar: " + idtask);
         loadData(idtask);
     }
-}
+}*/
 
 
-function save(){
+/*function save(){
     var form = $("#frmTask");
     var data = form.serialize();
     console.log(data);
@@ -142,9 +173,9 @@ function save(){
             }
         }
     });
-}
+}*/
 
-function startValidation(){
+/*function startValidation(){
      $('#frmTask').validate({
          rules: {
             txtTitulo: { required: true, minlength: 2, maxlength:45},
@@ -154,4 +185,4 @@ function startValidation(){
             save();
          }
      });
-}
+}*/

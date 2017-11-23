@@ -12,9 +12,11 @@ public class Application extends Controller {
     public Result getPeople(){
         return ok(views.html.persona.render());
     }
-
     public Result getTask(){
         return ok(views.html.taskGrid.render());
+    }
+    public Result getPersonTask() {
+        return ok(views.html.personTaskGrid.render());
     }
 
 }

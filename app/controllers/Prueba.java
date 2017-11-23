@@ -71,17 +71,14 @@ public class Prueba extends Controller{
         try{
             persona = Persona.find.byId(id);
             if (persona!=null){
-                //persona.setDeletedAt(new Date());
-                //city.setStatus(0);
-                //city.update();
                 persona.delete();
                 success = true;
-                message=Messages.get("api.record.delete");
+                message = Messages.get("api.record.delete");
             }
-            response = new Response(success,message);
         }catch (Exception e){
-            e.printStackTrace();
+            message = e.toString();
         }
+        response = new Response(success,message);
         return ok(Json.toJson(response));
     }
 
