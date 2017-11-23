@@ -11,7 +11,7 @@
     <div class="col-md-6 col-md-offset-3">
         <h1>@Messages.get("api.person.title")</h1>
         <br/>
-        <button class="btn btn-primary btn-md button-create" style="margin-bottom:10px;" id="btnNew">
+        <button class="btn btn-primary btn-md button-create" style="margin-bottom:10px;" id="btnNewPerson">
             <i class="fa fa-plus"></i>
             @Messages.get("api.button.create")
         </button>
@@ -33,12 +33,13 @@
 
 <textarea id="gridButtonsPerson" style="display: none;">
     <div class="btn-group" data-row="{data}">
-        <button class="btn btn-primary btn-xs button-edit" data-action="edit" title="Modificar"><i class="fa fa-sticky-note-o " aria-hidden="true"></i></button>
+        <button class="btn btn-primary btn-xs button-edit" data-action="task" title="Modificar" id="btnOpenTaskGrid"><i class="fa fa-sticky-note-o " aria-hidden="true"></i></button>
         <button class="btn btn-warning btn-xs button-edit" data-action="edit" title="Modificar"><i class="fa fa-pencil"></i></button>
         <button class="btn btn-danger btn-xs button-delete" data-action="delete" title="Eliminar"><i class="fa fa-times"></i></button>
     </div>
 </textarea>
 <textarea  id="peopleFormBody" style="display:none;">@formPeople()</textarea>
+<textarea  id="taskGridBody" style="display:none;">@formPersonTask()</textarea>
 
 <script src='@routes.Assets.versioned("plugins/js/jquery-3.2.1.min.js")'></script>
 <script src='@routes.Assets.versioned("plugins/js/base64.js")'></script>

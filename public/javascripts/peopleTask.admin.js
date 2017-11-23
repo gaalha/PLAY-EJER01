@@ -3,32 +3,31 @@ var gridStatus = "";
 var table;
 
 $(document).ready(function(){
-    prepareButtons()
+    prepareButtonsPerson()
     initGridPerson()
 });
 
 // /////////////////////////////////////// PERSONA
 function bindButtons(){
-    $('#tblTask tbody tr td button').unbind('click').on('click',function(event){
+    $('#tblPerson tbody tr td button').unbind('click').on('click',function(event){
         if(event.preventDefault) event.preventDefault();
         if(event.stopImmediatePropagation) event.stopImmediatePropagation();
 
         var obj = JSON.parse(Base64.decode($(this).parent().attr("data-row")));
         var action = $(this).attr("data-action");
 
-        if(action=='edit'){ showDialog(obj.idtask); }
-        else if(action=='delete'){ deleteRecord(obj.idtask); }
-        else if(action=='config'){ showDialogConfig(obj.idtask); }
+        if(action=='edit'){ showDialogPerson(obj.idPerson); }
+        else if(action=='delete'){ deleteRecord(obj.idPerson); }
+        else if(action=='task'){ showGridTask(obj.idtask); }
     })
 }
 
-function prepareButtons(){
+function prepareButtonsPerson(){
     var bodyButtons = $("#gridButtonsPerson").val();
     var tags = $("<div/>");
     tags.append(bodyButtons);
-
-    $("#btnNew").click(function(){showDialog()});
-
+    $("#btnNewPerson").click(function(){showDialogPerson()});
+    $("#btnOpenTaskGrid").click(function(){showGridTask()});
     gridButtonsPerson = "<center>"+tags.html()+"</center>"
 }
 
@@ -63,6 +62,46 @@ function initGridPerson(){
     });
     //$('#example').removeClass('display').addClass('table table-bordered table-hover dataTable');
 };
+
+
+function showDialogPerson(idPersona){
+    var isEditing = !(typeof(idPersona) === "undefined" || idPersona === 0);
+
+    dialog = bootbox.dialog({
+        title: (isEditing ? "MODIFICAR" : "CREAR NUEVO"),
+        message: $("#peopleFormBody").val(),
+        className:"modalSmall"
+    });
+
+   startValidation();
+
+    if(isEditing){
+        $("#idHidden").val(idPersona);
+        console.log("ID Persona a cargar: " + idPersona);
+        loadData(idPersona);
+    }
+}
+
+
+//MOSTRAR EL GRID PARA TAREAS
+function showGridTask(idtask){
+    var isEditing = !(typeof(idPersona) === "undefined" || idPersona === 0);
+
+    dialog = bootbox.dialog({
+        title: (isEditing ? "MODIFICAR" : "CREAR NUEVO"),
+        message: $("#taskGridBody").val(),
+        className:"modalSmall"
+    });
+
+   startValidation();
+
+    if(isEditing){
+        $("#idHidden").val(idPersona);
+        console.log("ID Persona a cargar: " + idPersona);
+        loadData(idPersona);
+    }
+}
+
 
 /*function initGrid(){
     table = $('#tblTask')
