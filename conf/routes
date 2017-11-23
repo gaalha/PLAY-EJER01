@@ -1,0 +1,32 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+# An example controller showing how to use dependency injection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+#PRUEBA, RUTAS PARA LA TABLA PERSONA
+GET     /peoples                    controllers.Application.getPeople()
+GET     /prueba                     controllers.Prueba.prueba()
+
+GET     /persona/editar/:id         controllers.Application.getPeopleEdit(id: Integer)
+POST    /editar/:id                 controllers.Prueba.getEditar(id: Integer)
+DELETE  /eliminar/:id               controllers.Prueba.getEliminar(id: Integer)
+POST    /insertar                   controllers.Prueba.save()
+GET     /getPeople/:id              controllers.Prueba.getPeople(id: String)
+
+#RUTAS PARA LA TABLA TASK
+GET     /task                       controllers.TaskController.GetTaskView()
+GET     /task/view                  controllers.Application.getTask()
+GET     /task/view/selectPeople     controllers.TaskController.getTaskToSelect()
+#ELIMINAR, MODIFICAR, AGREGAR y LLENAR CAMPOS
+GET     /task/get/:id               controllers.TaskController.getTask(id: String)
+POST    /task/insert                controllers.TaskController.getSaveTask()
+DELETE  /task/delete/:id            controllers.TaskController.getDeleteTask(id: Integer)
