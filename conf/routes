@@ -40,3 +40,8 @@ DELETE  /person/delete/:id          controllers.PersonController.delete(id: Stri
 GET     /person/get/:id             controllers.PersonController.getPerson(id: String)
 
 GET     /tasktwo                    controllers.TaskTwoController.GetTaskTwoView()
+GET     /tasktwo/view               controllers.Application.getTaskTwo()
+GET     /tasktwo/select             controllers.TaskTwoController.getTaskToSelect()
+POST    /tasktwo/save               controllers.TaskTwoController.save()
+DELETE  /tasktwo/delete/:id         controllers.TaskTwoController.deleteTask(id: Integer)
+GET     /tasktwo/get/:id            controllers.TaskTwoController.getTaskTwo(id: String)

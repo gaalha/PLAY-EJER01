@@ -22,6 +22,6 @@ public class Application extends Controller {
         return ok(views.html.personGrid.render());
     }
     public Result getTaskTwo() {
-        return ok(views.html.personTaskGrid.render());
+        return ok(views.html.taskTwoGrid.render());
     }
 }

@@ -74,8 +74,7 @@ public class Task_two extends Model{
 
     public static Finder<Integer, Task_two> find = new Finder<>(Task_two.class);
     public static List<Task_two> list_task(){
-        List<Task_two> lista;
-        lista = find.where().findList();
+        List<Task_two> lista = find.where().isNull("deletedAt").findList();
         return lista;
     }
 }

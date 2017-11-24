@@ -1,13 +1,18 @@
 package controllers;
 
+import items.ItemSelect;
 import items.ItemTaskTwo;
+import models.Person;
+import models.Person;
 import models.Task_two;
+import models.Task_two;
+import play.i18n.Messages;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import responses.ItemSelect2Response;
 import responses.Response;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by educacion on 24/11/2017.
@@ -25,9 +30,120 @@ public class TaskTwoController extends Controller{
             item.setDescriptionTask(task.getDescription());
             item.setDeleteAt(task.getDeletedAt());
             item.setIdPer(task.getIdPersona().getIdPersona());
+            item.setNombre(task.getIdPersona().getNombre());
 
             listaitem.add(item);
         }
         return ok(Json.toJson(new Response(true, "Exito", listaitem)));
+    }
+
+
+    //METODO DE GUARDADO
+    public Result save() {
+        boolean success = false;
+        String message = "";
+        Response response = null;
+
+        Map<String, String[]> params = request().body().asFormUrlEncoded();
+
+        String idHidden = params.get("idHidden")[0];
+        String txtTitulo = params.get("txtTitulo")[0];
+        String txtDescripcion = params.get("txtDescripcion")[0];
+        Integer selPersona = Integer.parseInt(params.get("selPersona")[0]);
+        try {
+            if (txtTitulo.isEmpty()) {
+                message = Messages.get("api.record.empty");
+                response = new Response(success, message);
+                return ok(Json.toJson(response));
+            } else{
+                Task_two task;
+                if (idHidden.isEmpty()) {
+                    task = new Task_two();
+                    message= Messages.get("api.record.save");
+                }else {
+                    int idObj= Integer.parseInt(idHidden);
+                    task = Task_two.find.byId(idObj);
+                    message= Messages.get("api.record.update");
+                }
+                task.setTitle(txtTitulo);
+                task.setDescription(txtDescripcion);
+                task.setIdPersona(Person.find.byId(selPersona));
+                task.save();
+                success = true;
+            }
+
+        }catch(Exception e) {
+            message = e.toString();
+        }
+        response = new Response(success,message);
+        return ok(Json.toJson(response));
+    }
+
+    // LLENAR SELECT LIST
+    public Result getTaskToSelect(){
+        ItemSelect2Response response;
+        List<ItemSelect> itemSelect2List = new ArrayList<>();
+        List<Person> personalist = Person.listaperson();
+
+        for (Person person: personalist)
+        {
+            ItemSelect item = new ItemSelect();
+            item.setId(person.getIdPersona());
+            item.setText(person.getNombre());
+            itemSelect2List.add(item);
+        }
+
+        response = new ItemSelect2Response(itemSelect2List);
+
+        return ok(Json.toJson(response));
+    }
+
+    //METODO PARA ELIMINAR
+    public Result deleteTask(Integer id){
+        boolean success=false;
+        String message = Messages.get("");
+        Task_two task = null;
+        Response response = null;
+        try{
+            task = Task_two.find.byId(id);
+            if (task != null){
+                task.setDeletedAt(new Date());
+                task.update();
+                success = true;
+                message = Messages.get("api.record.delete");
+            }
+            response = new Response(success,message);
+        }catch (Exception e){
+            message = e.toString();
+        }
+        return ok(Json.toJson(response));
+    }
+
+    //LLENAR EL FORMULARIO PARA MODIFICAR
+    public Result getTaskTwo(String id){
+        int idCtrl = Integer.parseInt(id.trim());
+        boolean success = false;
+        String message = Messages.get("api.record.error");
+        Task_two task = null;
+        ItemTaskTwo item=null;
+        Response<ItemTaskTwo> response=null;
+        try{
+            item = new ItemTaskTwo();
+            task = Task_two.find.byId(idCtrl);
+            if(task != null){
+                item.setIdTaskTwo(task.getIdTask());
+                item.setTitleTask(task.getTitle());
+                item.setDescriptionTask(task.getDescription());
+                item.setIdPer(task.getIdPersona().getIdPersona());
+                item.setNombre(task.getIdPersona().getNombre());
+                success = true;
+                message= Messages.get("api.record.success");
+            }
+
+            response = new Response(success,message,item);
+        }catch (Exception e){
+            message = "api.record.error" + e.toString();
+        }
+        return ok(Json.toJson(response));
     }
 }

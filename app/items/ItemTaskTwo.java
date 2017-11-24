@@ -10,6 +10,15 @@ public class ItemTaskTwo {
     private String descriptionTask;
     private Date deleteAt;
     private Integer idPer;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Integer getIdTaskTwo() {
         return idTaskTwo;
