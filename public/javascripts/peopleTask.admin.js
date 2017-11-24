@@ -5,6 +5,7 @@ var table;
 $(document).ready(function(){
     prepareButtonsPerson()
     initGridPerson()
+    //initGridTask()
 });
 
 // /////////////////////////////////////// PERSONA

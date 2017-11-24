@@ -5,9 +5,20 @@ api.person.title = Personas
 api.person.name = Nombre
 api.person.age = edad
 
+api.task.title = Tareas
+
 #BOTONES
 api.button.save = Guardar
 api.button.create = Crear
+
+#TABLES HEADER
+api.table.id = ID
+api.table.title = TITULO
+api.table.description = DESCRIPCION
+api.table.person = PERSONA
+api.table.action = ACCIONES
+api.table.name = NOMBRE
+api.table.age = EDAD
 
 #CONTROLLERS
 #TASK

@@ -32,3 +32,5 @@ DELETE  /task/delete/:id            controllers.TaskController.getDeleteTask(id:
 
 #PERSON-TASKS ROUTES
 GET     /task/person                controllers.Application.getPersonTask()
+GET     /tasktwo                    controllers.TaskTwoController.GetTaskTwoView()
+GET     /person                     controllers.PersonController.GetPersonView()
