@@ -62,10 +62,14 @@ public class Person extends Model{
     }
 
     public static Finder<Integer, Person> find = new Finder<>(Person.class);
-    public static List<Person> listaperson()
-    {
-        List<Person> lista = new ArrayList<>();
-        lista = find.where().findList();
+
+    public static List<Person> listaperson()    {
+        List<Person> lista = find.where().isNull("deletedAt").findList();
         return lista;
     }
+
+    /*public static List<City> getAllLst(){
+        List<City> lst = find.where().isNull("deletedAt").findList();
+        return lst;
+    }*/
 }

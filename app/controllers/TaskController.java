@@ -21,6 +21,7 @@ import responses.ItemSelect2Response;
  * Created by educacion on 22/11/2017.
  */
 public class TaskController extends Controller{
+
     public Result GetTaskView() {
         List<Task> lista = Task.listtask();
         List<ItemTask> listaitem = new ArrayList<>();
@@ -40,6 +41,7 @@ public class TaskController extends Controller{
         return ok(Json.toJson(new Response(true, "Exito", listaitem)));
     }
 
+    // LLENAR SELECT LIST
     public Result getTaskToSelect(){
         ItemSelect2Response response;
         List<ItemSelect> itemSelect2List = new ArrayList<>();
@@ -125,7 +127,7 @@ public class TaskController extends Controller{
         return ok(Json.toJson(response));
     }
 
-
+    //LLENAR EL FORMULARIO PARA MODIFICAR
     public Result getTask(String id){
         int idCtrl=Integer.parseInt(id.trim());
         boolean success = false;

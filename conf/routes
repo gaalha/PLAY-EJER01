@@ -32,9 +32,11 @@ DELETE  /task/delete/:id            controllers.TaskController.getDeleteTask(id:
 
 #PERSON-TASKS ROUTES
 GET     /task/person                controllers.Application.getPersonTask()
-GET     /tasktwo                    controllers.TaskTwoController.GetTaskTwoView()
+
 GET     /person                     controllers.PersonController.GetPersonView()
 GET     /person/view                controllers.Application.getPerson()
-
 POST    /person/save                controllers.PersonController.save()
+DELETE  /person/delete/:id          controllers.PersonController.delete(id: String)
+GET     /person/get/:id             controllers.PersonController.getPerson(id: String)
 
+GET     /tasktwo                    controllers.TaskTwoController.GetTaskTwoView()

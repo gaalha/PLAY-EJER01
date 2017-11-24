@@ -62,7 +62,7 @@ function deleteRecord(idPersona){
     bootbox.confirm("Desea Eliminar?", function(result) {
         if(result){
             $.ajax({
-                url:'/eliminar/'+idPersona,
+                url:'/person/delete/'+idPersona,
                 type:'DELETE',
                 success:function(data){
                     humane.log(data.message)
@@ -83,7 +83,7 @@ function loadData(idPersona){
     //var selCountryState = $("#selCountryState");
     //var status = $("#checkStatus");
         $.ajax({
-            url: "/getPeople/" + idPersona,
+            url: "/person/get/" + idPersona,
             type:'GET',
             success:function(data){
                 console.log(data);

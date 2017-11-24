@@ -6,9 +6,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import responses.Response;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by educacion on 24/11/2017.
@@ -71,6 +69,52 @@ public class PersonController extends Controller{
             response = new Response(success,message);
 
         }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return ok(Json.toJson(response));
+    }
+
+    public Result delete(String id){
+        boolean success = false;
+        String message = Messages.get("api.record.delete.error");
+        Person person = null;
+        Response response = null;
+        try{
+            person = Person.find.byId(Integer.parseInt(id));
+            if (person != null){
+                person.setDeletedAt(new Date());
+                person.update();
+                success = true;
+                message=Messages.get("api.record.delete");
+            }
+            response = new Response(success,message);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ok(Json.toJson(response));
+    }
+
+    //LLENAR EL FORMULARIO PARA MODIFICAR
+    public Result getPerson(String id){
+        int idCtrl=Integer.parseInt(id.trim());
+        boolean success = false;
+        String message = Messages.get("api.record.error");
+        Person person = null;
+        ItemPerson item=null;
+        Response<ItemPerson> response=null;
+        try{
+            item = new ItemPerson();
+            person = Person.find.byId(idCtrl);
+
+            if(person != null){
+                item.setIdPersona(person.getIdPersona());
+                item.setNombre(person.getNombre());
+                item.setEdad(person.getEdad());
+                success = true;
+                message= Messages.get("api.record.success");
+            }
+            response = new Response(success,message,item);
+        }catch (Exception e){
             e.printStackTrace();
         }
         return ok(Json.toJson(response));
