@@ -22,11 +22,12 @@ api.table.age = EDAD
 
 #CONTROLLERS
 #TASK
-api.record.delete = "Registro eliminado con exito"
-api.record.save = "Registro guardado con exito"
-api.record.update = "Registro modificado con exito"
-api.record.error = "ERROR: ¡Campos vacios!"
-api.record.delete.error = "!ERROR¡: Imposible eliminar el registro"
-api.record.success = "¡Correcto!"
+api.record.delete = Registro eliminado con exito
+api.record.save = Registro guardado con exito
+api.record.update = Registro modificado con exito
+api.record.error = ERROR: ¡Campos vacios!
+api.record.delete.error = !ERROR¡: Imposible eliminar el registro
+api.record.success = ¡Correcto!
+api.record.empty = ¡ERROR! Campos vacios
 
 

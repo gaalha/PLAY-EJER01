@@ -16,7 +16,7 @@
             @Messages.get("api.button.create")
         </button>
         <br/>
-        <table id="example" class="table table-striped table-bordered" width="100%" border="1">
+        <table id="tblPerson" class="table table-striped table-bordered" width="100%" border="1">
             <thead>
             <tr>
                 <th>@Messages.get("api.table.id")</th>
@@ -37,7 +37,7 @@
         <button class="btn btn-danger btn-xs button-delete" data-action="delete" title="Eliminar"><i class="fa fa-times"></i></button>
     </div>
 </textarea>
-<textarea  id="peopleFormBody" style="display:none;">@formPeople()</textarea>
+<textarea  id="peopleFormBody" style="display:none;">@formPerson()</textarea>
 
 <script src='@routes.Assets.versioned("plugins/js/jquery-3.2.1.min.js")'></script>
 <script src='@routes.Assets.versioned("plugins/js/base64.js")'></script>
@@ -46,6 +46,6 @@
 <script src='@routes.Assets.versioned("plugins/js/bootstrap.js")'></script>
 <script src='@routes.Assets.versioned("plugins/js/datatables.js")'></script>
 <script src='@routes.Assets.versioned("plugins/js/jquery.validate.js")'></script>
-<script src='@routes.Assets.versioned("javascripts/people.admin.js")'></script>
+<script src='@routes.Assets.versioned("javascripts/person.admin.js")'></script>
 
 <!-- datatable, bootstrap, jquery, bootbox, fontawesome -->

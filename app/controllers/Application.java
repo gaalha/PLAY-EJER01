@@ -18,5 +18,10 @@ public class Application extends Controller {
     public Result getPersonTask() {
         return ok(views.html.personTaskGrid.render());
     }
-
+    public Result getPerson() {
+        return ok(views.html.personGrid.render());
+    }
+    public Result getTaskTwo() {
+        return ok(views.html.personTaskGrid.render());
+    }
 }

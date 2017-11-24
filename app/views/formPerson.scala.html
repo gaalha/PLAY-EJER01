@@ -1,17 +1,16 @@
 @import play.i18n._
 @()
 
-<form role="form" id="frmPeople" style="margin-left:15px; margin-right:15px;">
+<form role="form" id="frmPerson" style="margin-left:15px; margin-right:15px;">
     <div class="row">
-
         <div class="form-group col-md-12">
             <label for="txtNombre">@Messages.get("api.person.name")</label>
-            <input type="text" class="form-control" placeholder="" name="txtNombre" id="txtNombre">
+            <input type="text" class="form-control" placeholder="" required name="txtNombre" id="txtNombre">
         </div>
 
         <div class="form-group col-md-12">
             <label for="txtEdad">@Messages.get("api.person.age")</label>
-            <input type="number" class="form-control" placeholder="" id="txtEdad" name="txtEdad">
+            <input type="number" class="form-control" placeholder="" required id="txtEdad" name="txtEdad">
         </div>
 
         <input  type="hidden" id="idHidden" name="idHidden" value="" >

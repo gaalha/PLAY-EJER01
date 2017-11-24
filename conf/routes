@@ -34,3 +34,7 @@ DELETE  /task/delete/:id            controllers.TaskController.getDeleteTask(id:
 GET     /task/person                controllers.Application.getPersonTask()
 GET     /tasktwo                    controllers.TaskTwoController.GetTaskTwoView()
 GET     /person                     controllers.PersonController.GetPersonView()
+GET     /person/view                controllers.Application.getPerson()
+
+POST    /person/save                controllers.PersonController.save()
+
