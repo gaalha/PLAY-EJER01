@@ -49,7 +49,7 @@ public class TaskTwoController extends Controller{
         String idHidden = params.get("idHidden")[0];
         String txtTitulo = params.get("txtTitulo")[0];
         String txtDescripcion = params.get("txtDescripcion")[0];
-        Integer selPersona = Integer.parseInt(params.get("selPersona")[0]);
+        String selPersona = params.get("selPersona")[0];
         try {
             if (txtTitulo.isEmpty()) {
                 message = Messages.get("api.record.empty");
@@ -67,7 +67,7 @@ public class TaskTwoController extends Controller{
                 }
                 task.setTitle(txtTitulo);
                 task.setDescription(txtDescripcion);
-                task.setIdPersona(Person.find.byId(selPersona));
+                task.setIdPersona(Person.getById(Integer.parseInt(selPersona.trim())));
                 task.save();
                 success = true;
             }
@@ -144,6 +144,32 @@ public class TaskTwoController extends Controller{
         }catch (Exception e){
             message = "api.record.error" + e.toString();
         }
+        return ok(Json.toJson(response));
+    }
+
+
+    //OBTENER LAS TAREAS POR PERSONA
+    public Result getTaskByPerson(String id){
+        Integer idCtrl = Integer.parseInt(id.trim());
+        boolean success =  false;
+        String message = "";
+
+        List<Task_two> taskList = Task_two.getTaskByPerson(idCtrl);
+        List<ItemTaskTwo> itemTaskList = new ArrayList<>();
+        Response<List<ItemTaskTwo>> response = null;
+
+        if(!taskList.isEmpty()){
+            for(Task_two task: taskList){
+                ItemTaskTwo item = new ItemTaskTwo();
+                item.setIdTaskTwo(task.getIdTask());
+                item.setTitleTask(task.getTitle());
+                item.setDescriptionTask(task.getDescription());
+                itemTaskList.add(item);
+            }
+        }
+        success = true;
+        message = Messages.get("api.record.success");
+        response = new Response(success, message, itemTaskList);
         return ok(Json.toJson(response));
     }
 }

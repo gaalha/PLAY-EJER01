@@ -5,7 +5,6 @@ var table;
 $(document).ready(function(){
     prepareButtonsPerson()
     initGridPerson()
-    //initGridTask()
 });
 
 // /////////////////////////////////////// PERSONA
@@ -17,9 +16,9 @@ function bindButtons(){
         var obj = JSON.parse(Base64.decode($(this).parent().attr("data-row")));
         var action = $(this).attr("data-action");
 
-        if(action=='edit'){ showDialogPerson(obj.idPerson); }
-        else if(action=='delete'){ deleteRecord(obj.idPerson); }
-        else if(action=='task'){ showGridTask(obj.idtask); }
+        if(action=='edit'){ showDialogPerson(obj.idPersona); }
+        else if(action=='delete'){ deleteRecord(obj.idPersona); }
+        else if(action=='task'){ showGridTask(obj.idPersona, obj.nombre); }
     })
 }
 
@@ -40,7 +39,7 @@ function initGridPerson(){
         //drawRowNumbers("#example",table);
      })
     .DataTable( {
-        ajax: "/prueba",
+        ajax: "/person",
         aoColumns: [
             { data: "idPersona" },
             { data: "nombre"},
@@ -53,10 +52,7 @@ function initGridPerson(){
              {
                  sortable:false, searchable:false,
                  render:function(data,type,row){
-                    //console.log(data);
                     return gridButtonsPerson.replace("{data}", Base64.encode(JSON.stringify(row)));
-                    //return "<a href='/persona/editar/"+row.idPersona+"' id='editar' onclick='confirmar()'>Editar </a>"
-                    //+ "<a href='/eliminar/"+row.idPersona+"'>Eliminar</a>";
                  }
              }
         ]
@@ -64,6 +60,25 @@ function initGridPerson(){
     //$('#example').removeClass('display').addClass('table table-bordered table-hover dataTable');
 };
 
+
+function loadDataPerson(idPersona){
+    var form = $("#frmPerson");
+    var txtNombre = $("#txtNombre");
+    var txtEdad = $("#txtEdad");
+    //var selCountryState = $("#selCountryState");
+    //var status = $("#checkStatus");
+        $.ajax({
+            url: "/person/get/" + idPersona,
+            type:'GET',
+            success:function(data){
+                console.log(data);
+                if(data.success == true){
+                    txtNombre.val(data.data.nombre);
+                    txtEdad.val(data.data.edad);
+                }
+            }
+        });
+}
 
 function showDialogPerson(idPersona){
     var isEditing = !(typeof(idPersona) === "undefined" || idPersona === 0);
@@ -79,133 +94,38 @@ function showDialogPerson(idPersona){
     if(isEditing){
         $("#idHidden").val(idPersona);
         console.log("ID Persona a cargar: " + idPersona);
-        loadData(idPersona);
+        loadDataPerson(idPersona);
     }
 }
 
 
-//MOSTRAR EL GRID PARA TAREAS
-function showGridTask(idtask){
-    var isEditing = !(typeof(idPersona) === "undefined" || idPersona === 0);
-
-    dialog = bootbox.dialog({
-        title: (isEditing ? "MODIFICAR" : "CREAR NUEVO"),
-        message: $("#taskGridBody").val(),
-        className:"modalSmall"
-    });
-
-   startValidation();
-
-    if(isEditing){
-        $("#idHidden").val(idPersona);
-        console.log("ID Persona a cargar: " + idPersona);
-        loadData(idPersona);
-    }
-}
-
-
-/*function initGrid(){
-    table = $('#tblTask')
-    .on('draw.dt',function(e,settings,json,xhr){
-        setTimeout(function(){bindButtons();},500);
-        //drawRowNumbers("#example",table);
-     })
-    .DataTable( {
-        ajax: "/task",
-        aoColumns: [
-            { data: "idtask" },
-            { data: "title" },
-            { data: "description" },
-            { data: "nombre" },
-             {
-                 sortable:false, searchable:false,
-                 render:function(data,type,row){
-                    return gridButtons.replace("{data}", Base64.encode(JSON.stringify(row)));
-                 }
-             }
-        ]
-    });
-    console.log("description");
-};*/
-
-
-/*function deleteRecord(idtask){
-$.confirm({
-    title: 'CONFIRMAR',
-    content: 'Desea eliminar?',
-    buttons: {
-        Si: function(result) {
-            if(result){
-                $.ajax({
-                    url:'/task/delete/'+idtask,
-                    type:'DELETE',
-                    success:function(data){
-                        humane.log(data.message)
-                        console.log(data)
-                        if(data.success){
-                            table.ajax.reload();
-                        }
+function deleteRecord(idPersona){
+    bootbox.confirm("Desea Eliminar?", function(result) {
+        if(result){
+            $.ajax({
+                url:'/person/delete/'+idPersona,
+                type:'DELETE',
+                success:function(data){
+                    humane.log(data.message)
+                    console.log(data)
+                    if(data.success){
+                        table.ajax.reload();
                     }
-                });
-            }
-        },
-        No: function () {
-        }
-    }
-});
-}*/
-
-/*function loadData(idtask){
-    var form = $("#frmTask");
-    var txtTitle = $("#txtTitulo");
-    var txtDescripcion = $("#txtDescripcion");
-    var selPersona = $("#selPersona");
-        $.ajax({
-            url: "/task/get/" + idtask,
-            type:'GET',
-            success:function(data){
-                console.log(data);
-                if(data.success == true){
-                    txtTitle.val(data.data.title);
-                    txtDescripcion.val(data.data.description);
-                    selPersona.select2("data",{id:data.data.idPersona,text:data.data.nombre});
                 }
-            }
-        });
-}*/
-
-/*function showDialog(idtask){
-    var isEditing = !(typeof(idtask) === "undefined" || idtask === 0);
-
-    dialog = bootbox.dialog({
-        title: (isEditing ? "MODIFICAR" : "CREAR NUEVA TAREA"),
-        message: $("#taskFormBody").val(),
-        className:"modalSmall"
+            });
+        }
     });
-
-    startValidation();
-
-    initAsyncSelect2("selPersona", "/task/view/selectPeople");
-
-    if(isEditing){
-        //set val to inputHidden
-        $("#idHidden").val(idtask);
-        console.log("ID Persona a cargar: " + idtask);
-        loadData(idtask);
-    }
-}*/
+}
 
 
-/*function save(){
-    var form = $("#frmTask");
+function save(){
+    var form = $("#frmPerson");
     var data = form.serialize();
-    console.log(data);
     $.ajax({
-        url: '/task/insert',
-        type:'POST',
+        url: '/person/save',
+        type: 'POST',
         data: data,
         success:function(data){
-            console.log(data);
             humane.log(data.message);
             if(data.success==true){
                 table.ajax.reload();
@@ -213,16 +133,186 @@ $.confirm({
             }
         }
     });
-}*/
+}
 
-/*function startValidation(){
-     $('#frmTask').validate({
+function startValidation(){
+     $('#frmPerson').validate({
          rules: {
-            txtTitulo: { required: true, minlength: 2, maxlength:45},
-            //txtEdad: { required: true, digits: true }
+            txtNombre: { required: true, minlength: 2, maxlength:45},
+            txtEdad: { required: true, digits: true }
          },
          submitHandler: function(form) {
             save();
          }
      });
-}*/
+}
+
+/**************************************
+// MOSTRAR EL GRID PARA TAREAS
+***************************************/
+var TaskGridButtons = "";
+var TaskGridStatus = "";
+var taskTable;
+
+function showGridTask(idPersona, nombre){
+    dialog = bootbox.dialog({
+        title: ("GESTION DE TAREAS POR PERSONA"),
+        message: $("#taskGridBody").val(),
+        size: "large"
+    });
+
+    $("#personIdHidden").val(idPersona);
+    $("#personNameHidden").val(nombre);
+
+    prepareButtonsTask();
+    initGridTask(idPersona);
+}
+
+function prepareButtonsTask(){
+    var bodyButtons = $("#gridButtonsTask").val();
+    var tags = $("<div/>");
+    tags.append(bodyButtons);
+
+    $("#btnNewTask").click(function() {showTaskDialog() });
+
+    TaskGridButtons = "<center>"+tags.html()+"</center>";
+}
+
+function bindTaskButtons() {
+    $('#tblTask tbody tr td button').unbind('click').on('click', function(event){
+        if(event.preventDefault) event.preventDefault();
+        if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+        var obj =  JSON.parse(Base64.decode($(this).parent().attr("data-row")));
+        var action = $(this).attr("data-action");
+
+        if(action == 'editTask'){showTaskDialog(obj.idTaskTwo);}
+        else if(action == "deleteTask"){deleteTaskRecord(obj.idTaskTwo);}
+    })
+}
+
+function initGridTask(idPersona){
+    taskTable = $('#tblTask')
+        .on('draw.dt', function(e, settings, json, xhr){
+            setTimeout(function(){bindTaskButtons();}, 500);
+        })
+        .DataTable({
+            ajax: "/tasktwo/person/" + idPersona,
+            aoColumns: [
+                { data: "idTaskTwo", sortable:false, searchable:false },
+                { data: "titleTask" },
+                { data: "descriptionTask" },
+                {
+                    sortable: false, searchable:false,
+                    render: function(data, type, row, meta){
+                        return TaskGridButtons.replace("{data}", Base64.encode(JSON.stringify(row)));
+                    }
+                }
+            ]
+        });
+}
+
+function loadTaskData(idTaskTwo){
+    var form = $("#frmTask");
+    var title = $("#txtTitulo");
+    var description = $("#txtDescripcion");
+    var person = $("#selPersona");
+
+    $.ajax({
+        url: "/tasktwo/get/" + idTaskTwo,
+        type: 'GET',
+        success: function(data){
+            if(data.success == true){
+                title.val(data.data.titleTask);
+                description.val(data.data.descriptionTask);
+                person.select2("data",{id:data.data.idPersona,text:data.data.nombre});
+            }
+        }
+    });
+}
+
+function loadPersonSelect2(idPersona){
+    var person = $("#selPersona");
+    var personId = $("#personIdHidden").val();
+
+    $.ajax({
+        url: "/person/get/" + personId,
+        type: 'GET',
+        success: function(data){
+            if(data.success == true){
+                person.select2("data",{id:data.data.idPersona,text:data.data.nombre}).select2('disable');
+            }
+        }
+    });
+}
+
+
+function showTaskDialog(idTaskTwo){
+    var isEditing = !(typeof(idTaskTwo) === "undefined" || idTaskTwo === 0);
+    var personId = $("#personIdHidden");
+
+    dialog = bootbox.dialog({
+        title: (isEditing ? "EDITAR" : "NUEVO"),
+        message: $("#taskFormBody").val(),
+        className: "modalSmall"
+    });
+    initAsyncSelect2("selPersona", "/tasktwo/select");
+    startTaskValidation();
+
+    if(isEditing){
+        $("#idHidden").val(idTaskTwo);
+        loadTaskData(idTaskTwo);
+    }else{
+        loadPersonSelect2(personId);
+    }
+}
+
+function startTaskValidation(){
+    $("#frmTask").validate({
+        rules: {
+            txtTitulo: { required: true, minlength: 5, maxlength: 150 },
+            txtDescripcion: {required: true, minlength: 10, maxlength: 200 }
+        },
+        submitHandler: function(form){
+            saveTask();
+        }
+    })
+}
+
+function saveTask(){
+    var person = $("#selPersona");
+    person.select2('enable');
+
+    var form = $("#frmTask");
+    var data = form.serialize();
+
+    $.ajax({
+        url: '/tasktwo/save',
+        type: 'POST',
+        data: data,
+        success: function(data){
+            humane.log(data.message);
+            if(data.success == true){
+                taskTable.ajax.reload();
+                dialog.modal('hide');
+            }
+        }
+    });
+}
+
+function deleteTaskRecord(idTaskTwo){
+    bootbox.confirm("Desea Eliminar?", function(result) {
+        if(result){
+            $.ajax({
+                url:'/tasktwo/delete/' + idTaskTwo,
+                type:'DELETE',
+                success:function(data){
+                    humane.log(data.message)
+                    if(data.success){
+                        taskTable.ajax.reload();
+                    }
+                }
+            });
+        }
+    });
+}
+

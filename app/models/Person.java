@@ -68,8 +68,9 @@ public class Person extends Model{
         return lista;
     }
 
-    /*public static List<City> getAllLst(){
-        List<City> lst = find.where().isNull("deletedAt").findList();
-        return lst;
-    }*/
+    public static Person getById(int idPersona){
+        Person person = find.where().isNull("deletedAt").eq("idPersona", idPersona).findUnique();
+        if(person == null) return null;
+        return person;
+    }
 }

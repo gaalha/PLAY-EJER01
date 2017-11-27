@@ -77,4 +77,9 @@ public class Task_two extends Model{
         List<Task_two> lista = find.where().isNull("deletedAt").findList();
         return lista;
     }
+
+    public static List<Task_two> getTaskByPerson(Integer idPersona){
+        List<Task_two> taskList = find.where().isNull("deletedAt").eq("idPersona", Person.find.byId(idPersona)).findList();
+        return taskList;
+    }
 }

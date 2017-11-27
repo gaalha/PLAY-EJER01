@@ -147,8 +147,9 @@ function save(){
 function startValidation(){
      $('#frmTask').validate({
          rules: {
-            txtTitulo: { required: true, minlength: 2, maxlength:45},
-            //txtEdad: { required: true, digits: true }
+            txtTitulo: { required: true, minlength: 10, maxlength: 50, number: false },
+            txtDescripcion: { required: true, minlength: 10, maxlength: 50, number: false },
+            txtDescripcion: { required: true }
          },
          submitHandler: function(form) {
             save();

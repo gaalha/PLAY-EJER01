@@ -5,6 +5,8 @@
 <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/datatables.css")'>
 <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/font-awesome.css")'>
 <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/libnotify.css")'>
+<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/select2.css")'>
+<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/select2-bootstrap.css")'>
 
 
 <div class="row">
@@ -23,7 +25,6 @@
                 <th>NOMBRE</th>
                 <th>EDAD</th>
                 <th>ACCION</th>
-
             </tr>
             </thead>
         </table>
@@ -38,7 +39,7 @@
         <button class="btn btn-danger btn-xs button-delete" data-action="delete" title="Eliminar"><i class="fa fa-times"></i></button>
     </div>
 </textarea>
-<textarea  id="peopleFormBody" style="display:none;">@formPeople()</textarea>
+<textarea  id="peopleFormBody" style="display:none;">@formPerson()</textarea>
 <textarea  id="taskGridBody" style="display:none;">@formPersonTask()</textarea>
 
 <script src='@routes.Assets.versioned("plugins/js/jquery-3.2.1.min.js")'></script>

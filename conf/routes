@@ -45,3 +45,4 @@ GET     /tasktwo/select             controllers.TaskTwoController.getTaskToSelec
 POST    /tasktwo/save               controllers.TaskTwoController.save()
 DELETE  /tasktwo/delete/:id         controllers.TaskTwoController.deleteTask(id: Integer)
 GET     /tasktwo/get/:id            controllers.TaskTwoController.getTaskTwo(id: String)
+GET     /tasktwo/person/:id         controllers.TaskTwoController.getTaskByPerson(id: String)
