@@ -3,7 +3,7 @@
 #taskGrid
 api.person.title = Personas
 api.person.name = Nombre
-api.person.age = edad
+api.person.age = Edad
 api.taskperson.title = Tareas por persona
 api.dashboard.title = Dashboard
 
