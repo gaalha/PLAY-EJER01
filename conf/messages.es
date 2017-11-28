@@ -4,6 +4,8 @@
 api.person.title = Personas
 api.person.name = Nombre
 api.person.age = edad
+api.taskperson.title = Tareas por persona
+api.dashboard.title = Dashboard
 
 api.task.title = Tareas
 

@@ -1,17 +1,11 @@
 @import play.i18n._
 @()
 
-<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/bootstrap.css")'>
-<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/datatables.css")'>
-<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/font-awesome.css")'>
-<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/libnotify.css")'>
-<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/select2.css")'>
-<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/select2-bootstrap.css")'>
-<link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/jquery-confirm.css")'>
+@scripts={}
 
-
+@main("TAREAS")(scripts){
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-10 col-md-offset-1">
         <h1>@Messages.get("api.task.title")</h1>
         <br/>
         <button class="btn btn-primary btn-md button-create" style="margin-bottom:10px;" id="btnNew">
@@ -42,17 +36,5 @@
 </textarea>
 <textarea  id="taskFormBody" style="display:none;">@formTaskTwo()</textarea>
 
-<script src='@routes.Assets.versioned("plugins/js/jquery-3.2.1.min.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/base64.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/humane.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/bootbox.min.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/bootstrap.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/datatables.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/jquery.validate.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/utils.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/select2.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/select2_locale_es.js")'></script>
-<script src='@routes.Assets.versioned("plugins/js/jquery-confirm.js")'></script>
 <script src='@routes.Assets.versioned("javascripts/taskTwo.admin.js")'></script>
-
-<!-- datatable, bootstrap, jquery, bootbox, fontawesome -->
+}
