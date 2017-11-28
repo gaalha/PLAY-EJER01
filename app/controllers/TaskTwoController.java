@@ -29,7 +29,7 @@ public class TaskTwoController extends Controller{
             item.setTitleTask(task.getTitle());
             item.setDescriptionTask(task.getDescription());
             item.setDeleteAt(task.getDeletedAt());
-            item.setIdPer(task.getIdPersona().getIdPersona());
+            item.setIdPersona(task.getIdPersona().getIdPersona());
             item.setNombre(task.getIdPersona().getNombre());
 
             listaitem.add(item);
@@ -134,7 +134,7 @@ public class TaskTwoController extends Controller{
                 item.setIdTaskTwo(task.getIdTask());
                 item.setTitleTask(task.getTitle());
                 item.setDescriptionTask(task.getDescription());
-                item.setIdPer(task.getIdPersona().getIdPersona());
+                item.setIdPersona(task.getIdPersona().getIdPersona());
                 item.setNombre(task.getIdPersona().getNombre());
                 success = true;
                 message= Messages.get("api.record.success");

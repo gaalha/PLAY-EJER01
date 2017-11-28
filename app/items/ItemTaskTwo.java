@@ -9,7 +9,7 @@ public class ItemTaskTwo {
     private String titleTask;
     private String descriptionTask;
     private Date deleteAt;
-    private Integer idPer;
+    private Integer idPersona;
     private String nombre;
 
     public String getNombre() {
@@ -52,12 +52,12 @@ public class ItemTaskTwo {
         this.deleteAt = deleteAt;
     }
 
-    public Integer getIdPer() {
-        return idPer;
+    public Integer getIdPersona() {
+        return idPersona;
     }
 
-    public void setIdPer(Integer idPer) {
-        this.idPer = idPer;
+    public void setIdPersona(Integer idPersona) {
+        this.idPersona = idPersona;
     }
 
 
