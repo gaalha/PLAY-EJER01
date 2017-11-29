@@ -47,4 +47,17 @@ DELETE  /tasktwo/delete/:id         controllers.TaskTwoController.deleteTask(id:
 GET     /tasktwo/get/:id            controllers.TaskTwoController.getTaskTwo(id: String)
 GET     /tasktwo/person/:id         controllers.TaskTwoController.getTaskByPerson(id: String)
 
-GET    /dashboard                  controllers.Application.getDashboard()
+GET     /dashboard                  controllers.Application.getDashboard()
+
+# RUTAS PARA LOS METODOS DE API
+GET     /api/person                 controllers.Api.GetPersonView()
+POST    /api/person/save            controllers.Api.savePerson()
+DELETE  /api/person/del/:id         controllers.Api.deletePerson(id: String)
+GET     /api/person/get/:id         controllers.Api.getPerson(id: String)
+
+GET     /api/task                   controllers.Api.GetTaskTwoView()
+POST    /api/task/save              controllers.Api.saveTask()
+GET     /api/task/select            controllers.Api.getTaskToSelect()
+DELETE  /api/task/del/:id           controllers.Api.deleteTask(id: Integer)
+GET     /api/task/get/:id           controllers.Api.getTaskTwo(id: String)
+GET     /api/task/person/:id        controllers.Api.getTaskByPerson(id: String)

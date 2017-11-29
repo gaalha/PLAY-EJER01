@@ -1,11 +1,9 @@
 @import play.i18n._
 @()
 
-@scripts={
-    <script src='@routes.Assets.versioned("javascripts/person.admin.js")'></script>
-}
+@scripts={}
 
-@main("TITULO")(scripts){
+@main("DASHBOARD")(scripts){
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <h1>@Messages.get("api.dashboard.title")</h1>

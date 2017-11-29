@@ -11,6 +11,8 @@
         <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/font-awesome.css")'>
         <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/libnotify.css")'>
         <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/sb-admin.css")'>
+        <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/select2.css")'>
+        <link rel="stylesheet" href='@routes.Assets.versioned("plugins/css/select2-bootstrap.css")'>
         @scripts
         <script src='@routes.Assets.versioned("plugins/js/jquery-3.2.1.min.js")'></script>
         <script src='@routes.Assets.versioned("plugins/js/base64.js")'></script>
@@ -149,13 +151,13 @@
                         <a href="/dashboard"><i class="fa fa-fw fa-dashboard" id="dashboard" data-action="dashboard"></i> Dashboard</a>
                     </li>
                     <li id="per">
-                        <a href="/person/view" id="personas"><i class="fa fa-fw fa-user"></i> PERSONAS</a>
+                        <a href="/person/view" id="personas"><i class="fa fa-fw fa-user"></i> Personas</a>
                     </li>
                     <li>
-                        <a href="/tasktwo/view"><i class="fa fa-fw fa-sticky-note-o" id="tareas"></i> TAREAS</a>
+                        <a href="/tasktwo/view"><i class="fa fa-fw fa-sticky-note-o" id="tareas"></i> Tareas</a>
                     </li>
                     <li>
-                        <a href="/task/person"><i class="fa fa-fw fa-thumb-tack" id="taskPerson"></i> POR PERSONA</a>
+                        <a href="/task/person"><i class="fa fa-fw fa-thumb-tack" id="taskPerson"></i> Por personas</a>
                     </li>
 
                 </ul>
@@ -165,7 +167,7 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
+            <div class="container-fluid" id="contenido">
                 @content
             </div>
             <!-- /.container-fluid -->
