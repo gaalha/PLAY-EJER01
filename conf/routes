@@ -50,14 +50,15 @@ GET     /tasktwo/person/:id         controllers.TaskTwoController.getTaskByPerso
 GET     /dashboard                  controllers.Application.getDashboard()
 
 # RUTAS PARA LOS METODOS DE API
-GET     /api/person                 controllers.Api.GetPersonView()
-POST    /api/person/save            controllers.Api.savePerson()
-DELETE  /api/person/del/:id         controllers.Api.deletePerson(id: String)
-GET     /api/person/get/:id         controllers.Api.getPerson(id: String)
-
-GET     /api/task                   controllers.Api.GetTaskTwoView()
-POST    /api/task/save              controllers.Api.saveTask()
-GET     /api/task/select            controllers.Api.getTaskToSelect()
-DELETE  /api/task/del/:id           controllers.Api.deleteTask(id: Integer)
-GET     /api/task/get/:id           controllers.Api.getTaskTwo(id: String)
-GET     /api/task/person/:id        controllers.Api.getTaskByPerson(id: String)
+#PERSON
+GET     /api/person                 controllers.api.ApiPerson.GetPersonView()
+POST    /api/person/save            controllers.api.ApiPerson.savePerson()
+DELETE  /api/person/del/:id         controllers.api.ApiPerson.deletePerson(id: String)
+GET     /api/person/get/:id         controllers.api.ApiPerson.getPerson(id: String)
+#TASK
+GET     /api/task                   controllers.api.ApiTask.GetTaskTwoView()
+POST    /api/task/save              controllers.api.ApiTask.saveTask()
+GET     /api/task/select            controllers.api.ApiTask.getTaskToSelect()
+DELETE  /api/task/del/:id           controllers.api.ApiTask.deleteTask(id: Integer)
+GET     /api/task/get/:id           controllers.api.ApiTask.getTaskTwo(id: String)
+GET     /api/task/person/:id        controllers.api.ApiTask.getTaskByPerson(id: String)
