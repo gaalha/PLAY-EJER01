@@ -62,3 +62,5 @@ GET     /api/task/select            controllers.api.ApiTask.getTaskToSelect()
 DELETE  /api/task/del/:id           controllers.api.ApiTask.deleteTask(id: Integer)
 GET     /api/task/get/:id           controllers.api.ApiTask.getTaskTwo(id: String)
 GET     /api/task/person/:id        controllers.api.ApiTask.getTaskByPerson(id: String)
+
+GET     /login                      controllers.Application.getLogin()

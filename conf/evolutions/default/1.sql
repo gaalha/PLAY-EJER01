@@ -35,6 +35,14 @@ create table task_two (
   constraint pk_task_two primary key (idtasktwo)
 );
 
+create table usuario (
+  iduser                        serial not null,
+  name                          varchar(255),
+  password                      varchar(255),
+  delete_at                     timestamp,
+  constraint pk_usuario primary key (iduser)
+);
+
 alter table task add constraint fk_task_id_persona foreign key (id_persona) references persona (idpersona) on delete restrict on update restrict;
 create index ix_task_id_persona on task (id_persona);
 
@@ -57,4 +65,6 @@ drop table if exists persona cascade;
 drop table if exists task cascade;
 
 drop table if exists task_two cascade;
+
+drop table if exists usuario cascade;
 

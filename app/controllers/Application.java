@@ -25,4 +25,7 @@ public class Application extends Controller {
         return ok(views.html.taskTwoGrid.render());
     }
     public Result getDashboard() {return ok(views.html.dashboard.render());}
+    public Result getLogin() {
+        return ok(views.html.login.render());
+    }
 }

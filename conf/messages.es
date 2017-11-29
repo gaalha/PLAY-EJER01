@@ -32,4 +32,7 @@ api.record.delete.error = !ERROR¡: Imposible eliminar el registro
 api.record.success = ¡Correcto!
 api.record.empty = ¡ERROR! Campos vacios
 
+api.record.null = El usuario no existe
+api.record.welcome = Bienvenido
+
 
