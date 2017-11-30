@@ -34,5 +34,5 @@ api.record.empty = ¡ERROR! Campos vacios
 
 api.record.null = El usuario no existe
 api.record.welcome = Bienvenido
-
+api.record.logout = CERRANDO SESION
 

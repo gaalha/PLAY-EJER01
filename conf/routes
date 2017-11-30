@@ -64,3 +64,6 @@ GET     /api/task/get/:id           controllers.api.ApiTask.getTaskTwo(id: Strin
 GET     /api/task/person/:id        controllers.api.ApiTask.getTaskByPerson(id: String)
 
 GET     /login                      controllers.Application.getLogin()
+POST    /login/validate             controllers.UserController.validateLogin()
+GET     /logout                     controllers.UserController.logout()
+GET     /name                       controllers.UserController.name()

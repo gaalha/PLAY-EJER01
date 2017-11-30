@@ -21,9 +21,7 @@ public class UserController extends Controller{
 
     public Result validateLogin(){
         boolean success = false;
-        String message = "";
-        Response response = null;
-
+        String message= Messages.get("api.record.null");
         Map<String, String[]> params = request().body().asFormUrlEncoded();
         String name = params.get("txtName")[0];
         String pass = params.get("txtPass")[0];
@@ -31,17 +29,16 @@ public class UserController extends Controller{
         try {
             if (name.isEmpty() || pass.isEmpty()) {
                 message = Messages.get("api.record.empty");
-                response = new Response(success, message);
+                Response response = new Response(success, message);
                 return ok(Json.toJson(response));
             } else{
-                User user = new User();
-                boolean validar = user.getUserLogin(name, pass);
-
+                boolean validar = User.getUserLogin(name, pass);
                 if (validar == true) {
-                    message= Messages.get("api.record.welcome");
+                    session("user", name);
+                    message = Messages.get("api.record.welcome");
                     success = true;
-                }else {
-                    message= Messages.get("api.record.null");
+                }else if (validar == false){
+                    message = Messages.get("api.record.null");
                     success = false;
                 }
             }
@@ -49,8 +46,23 @@ public class UserController extends Controller{
         catch(Exception e) {
             message = e.toString();
         }
-        response = new Response(success,message);
+        Response response = new Response(success,message, name);
         return ok(Json.toJson(response));
+    }
+
+    public Result logout() {
+        //boolean success = true;
+        //String message = Messages.get("api.record.logout");
+        //Response response = new Response(success,message);
+        session().remove("user");
+
+        //return ok(Json.toJson(response));
+        return redirect("/login");
+    }
+
+    public Result name() {
+        String nombre = session("user");
+        return ok(nombre);
     }
 
 }

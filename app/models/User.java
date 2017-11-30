@@ -20,9 +20,9 @@ public class User extends Model{
     private String name;
     @Column(name = "password")
     private String password;
-    @Column(name = "delete_at")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date deletedAt;
+    //@Column(name = "delete_at")
+    //@Temporal(TemporalType.TIMESTAMP)
+    //private Date deletedAt;
 
     public Integer getIdUser() {
         return idUser;
@@ -52,13 +52,13 @@ public class User extends Model{
         this.password = password;
     }
 
-    public Date getDeletedAt() {
+    /*public Date getDeletedAt() {
         return deletedAt;
     }
 
     public void setDeletedAt(Date deletedAt) {
         this.deletedAt = deletedAt;
-    }
+    }*/
 
     public static Finder<Integer, User> finder = new Finder<>(User.class);
 
@@ -67,9 +67,12 @@ public class User extends Model{
         return lista;
     }
 
-    public boolean getUserLogin(String name, String pass){
-        User user = finder.where().isNull("deletedAt").eq("name", name).eq("password", pass).findUnique();
-        if(user == null) return false;
-        return true;
+    public static boolean getUserLogin(String name, String pass){
+        User user = finder.where().eq("name", name).eq("password", pass).findUnique();
+        if(user == null){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

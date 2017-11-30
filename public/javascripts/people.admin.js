@@ -99,7 +99,6 @@ function loadData(idPersona){
                 console.log(data);
                 if(data.success == true){
                     txtNombre.val(data.data.nombre);
-
                     txtEdad.val(data.data.edad);
                 }
             }

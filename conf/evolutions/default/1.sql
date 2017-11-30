@@ -39,7 +39,6 @@ create table usuario (
   iduser                        serial not null,
   name                          varchar(255),
   password                      varchar(255),
-  delete_at                     timestamp,
   constraint pk_usuario primary key (iduser)
 );
 

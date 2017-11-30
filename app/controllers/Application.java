@@ -10,22 +10,61 @@ import items.ItemPeople;
  */
 public class Application extends Controller {
     public Result getPeople(){
-        return ok(views.html.persona.render());
+        String usuario = session("user");
+        if(usuario == null){
+            return getLogin();
+        }else{
+            return ok(views.html.persona.render());
+        }
     }
     public Result getTask(){
-        return ok(views.html.taskGrid.render());
+        String usuario = session("user");
+        if(usuario == null){
+            return getLogin();
+        }else{
+            return ok(views.html.taskGrid.render());
+        }
     }
     public Result getPersonTask() {
-        return ok(views.html.personTaskGrid.render());
+        String usuario = session("user");
+        if(usuario == null){
+            return getLogin();
+        }else{
+            return ok(views.html.personTaskGrid.render());
+        }
     }
     public Result getPerson() {
-        return ok(views.html.personGrid.render());
+        String usuario = session("user");
+        if(usuario == null){
+            return getLogin();
+        }else{
+            return ok(views.html.personGrid.render());
+        }
     }
     public Result getTaskTwo() {
-        return ok(views.html.taskTwoGrid.render());
+        String usuario = session("user");
+        if(usuario == null){
+            return getLogin();
+        }else{
+            return ok(views.html.taskTwoGrid.render());
+        }
     }
-    public Result getDashboard() {return ok(views.html.dashboard.render());}
-    public Result getLogin() {
-        return ok(views.html.login.render());
+
+    public Result getDashboard(){
+        String usuario = session("user");
+        if(usuario == null){
+            return getLogin();
+        }else{
+            return ok(views.html.dashboard.render());
+        }
+    }
+
+    public Result getLogin(){
+        String usuario = session("user");
+        if(usuario != null){
+            return getDashboard();
+        }else{
+            return ok(views.html.login.render());
+        }
     }
 }
